@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohini Aika | Computer Science Engineering Student</title>
+
+    <!-- Tailwind CSS + Font Awesome + Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#0b0f19',
+                            card: '#131b2e',
+                            border: '#1e293b',
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            purple: '#a855f7',
+                            emerald: '#10b981'
+                        }
+                    },
+                    animation: {
+                        float: 'float 6s ease-in-out infinite',
+                        glow: 'glow 4s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        },
+                        glow: {
+                            '0%': { opacity: '0.35', filter: 'blur(25px)' },
+                            '100%': { opacity: '0.7', filter: 'blur(40px)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .glass-card {
+            background: rgba(19,27,46,0.58);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.07);
+            transition: all .35s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0,242,254,.35);
+            box-shadow: 0 15px 40px -12px rgba(0,242,254,.16);
+            transform: translateY(-4px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg,#00f2fe 0%,#4facfe 50%,#a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typing-cursor::after {
+            content: '▋';
+            color: #00f2fe;
+            animation: blink .8s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
+
+        .section-line {
+            width: 64px;
+            height: 4px;
+            margin: 14px auto 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg,#00f2fe,#a855f7);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen antialiased selection:bg-cyan-300 selection:text-black">
+
+    <!-- Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/10 rounded-full animate-glow"></div>
+        <div class="absolute top-1/3 right-0 w-[450px] h-[450px] bg-purple-500/10 rounded-full animate-glow" style="animation-delay:2s"></div>
+        <div class="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-blue-500/10 rounded-full animate-glow" style="animation-delay:4s"></div>
+        <div class="absolute inset-0 opacity-20"
+             style="background-image:radial-gradient(#1e293b 1px,transparent 1px);background-size:28px 28px"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
+            <div class="glass-nav rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-2xl">
+                <a href="#home" class="font-mono text-lg sm:text-xl font-bold flex items-center gap-2">
+                    <span class="text-cyber-cyan">&lt;</span>
+                    <span class="gradient-text">Rohini</span>
+                    <span class="text-cyber-cyan">/&gt;</span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-7 text-sm">
+                    <a href="#about" class="hover:text-cyber-cyan transition">About</a>
+                    <a href="#skills" class="hover:text-cyber-cyan transition">Skills</a>
+                    <a href="#projects" class="hover:text-cyber-cyan transition">Projects</a>
+                    <a href="#education" class="hover:text-cyber-cyan transition">Education</a>
+                    <a href="#contact" class="hover:text-cyber-cyan transition">Contact</a>
+                </nav>
+
+                <a href="#contact"
+                   class="hidden md:inline-flex px-4 py-2 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple hover:scale-105 transition">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Let's Connect
+                </a>
+
+                <button id="menuBtn" class="md:hidden text-xl text-slate-300">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden max-w-7xl mx-auto px-4 mt-2">
+            <div class="glass-nav rounded-2xl p-5 flex flex-col gap-4 text-center">
+                <a href="#about" class="mobile-link">About</a>
+                <a href="#skills" class="mobile-link">Skills</a>
+                <a href="#projects" class="mobile-link">Projects</a>
+                <a href="#education" class="mobile-link">Education</a>
+                <a href="#contact" class="mobile-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen pt-36 pb-20 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-7 text-center lg:text-left space-y-7">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-cyan-400/30 text-xs font-mono text-cyber-cyan">
+                        <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-ping"></span>
+                        B.Tech CSE 
+                    </div>
+
+                    <div>
+                        <p class="text-slate-400 font-mono text-sm mb-2">Hello, I'm</p>
+                        <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight">
+                            <span class="gradient-text">Rohini Aika</span>
+                        </h1>
+
+                        <div class="mt-4 text-lg sm:text-2xl font-mono text-slate-300 h-10">
+                            <span id="typingText" class="typing-cursor text-cyber-cyan font-semibold"></span>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Computer Science & Engineering student at
+                        <strong class="text-white">Lendi Institute of Engineering and Technology</strong>,
+                        interested in software development, web technologies, databases, and building practical applications.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple text-black font-bold text-sm hover:scale-105 transition shadow-xl">
+                            Explore Projects <i class="fa-solid fa-arrow-down ml-2"></i>
+                        </a>
+                        <a href="#contact" class="px-6 py-3.5 rounded-xl glass-card border border-slate-700 text-sm font-semibold hover:border-cyber-cyan/50">
+                            Contact Me <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </a>
+                    </div>
+
+                    <div class="pt-5 border-t border-slate-800/80 flex flex-wrap justify-center lg:justify-start gap-5 text-slate-400 text-xs font-mono">
+                        <span>Primary Skills:</span>
+                        <span class="text-cyber-cyan">Python</span>
+                        <span class="text-cyber-purple">Java</span>
+                        <span class="text-cyber-blue">HTML/CSS</span>
+                        <span class="text-cyber-emerald">MySQL</span>
+                    </div>
+                </div>
+
+                <!-- Terminal card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-lg glass-card rounded-2xl overflow-hidden shadow-2xl animate-float">
+                        <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400">rohini_profile.py</span>
+                            <button onclick="copyProfile()" class="text-slate-500 hover:text-cyber-cyan">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="p-6 font-mono text-xs leading-relaxed bg-slate-950/80 space-y-3">
+                            <div><span class="text-cyber-purple">class</span> <span class="text-cyber-cyan">RohiniAika</span>:</div>
+                            <div class="pl-4 text-slate-300">
+                                name = <span class="text-amber-300">"Rohini Aika"</span><br>
+                                degree = <span class="text-amber-300">"B.Tech CSE"</span><br>
+                                college = <span class="text-amber-300">"Lendi Institute of Engineering and Technology"</span><br>
+                                cgpa = <span class="text-cyber-emerald">8.95</span>
+                            </div>
+
+                            <div><span class="text-cyber-purple">skills</span> = [</div>
+                            <div class="pl-4 text-slate-300">
+                                <span class="text-amber-300">"Python"</span>, <span class="text-amber-300">"Java"</span>,<br>
+                                <span class="text-amber-300">"HTML"</span>, <span class="text-amber-300">"CSS"</span>,<br>
+                                <span class="text-amber-300">"MySQL"</span>, <span class="text-amber-300">"MongoDB"</span>
+                            </div>
+                            <div>]</div>
+
+                            <div class="pt-2 border-t border-slate-800 flex justify-between">
+                                <span class="text-cyber-emerald"># Ready to learn & build</span>
+                                <span class="text-cyber-cyan animate-pulse">● Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <h2 class="text-xs font-mono tracking-widest text-cyber-cyan uppercase">01. Background</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold mt-2">About Me</p>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 glass-card rounded-2xl p-8 space-y-5">
+                    <p class="text-lg font-medium leading-relaxed">
+                        I am a <span class="text-cyber-cyan">Computer Science & Engineering student</span>
+                        who enjoys learning programming and turning ideas into useful applications.
+                    </p>
+
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        My current technical foundation includes <strong class="text-white">Python, Java, HTML, CSS and MySQL</strong>.
+                        I also work with tools such as VS Code, MongoDB Compass and Jupyter Notebook.
+                    </p>
+
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        I am particularly interested in <strong class="text-white">software development and web development</strong>
+                        and am continuously improving my programming, SQL and problem-solving skills for internships and campus placements.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-800">
+                        <div class="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                            <div class="text-2xl font-bold text-cyber-cyan">8.95</div>
+                            <div class="text-[11px] text-slate-400">B.Tech CGPA</div>
+                        </div>
+                        <div class="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                            <div class="text-2xl font-bold text-cyber-purple">86%</div>
+                            <div class="text-[11px] text-slate-400">Diploma</div>
+                        </div>
+                        <div class="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                            <div class="text-2xl font-bold text-cyber-blue">2+</div>
+                            <div class="text-[11px] text-slate-400">Projects</div>
+                        </div>
+                        <div class="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                            <div class="text-2xl font-bold text-cyber-emerald">2025</div>
+                            <div class="text-[11px] text-slate-400">B.Tech Started</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card rounded-2xl p-5 flex gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-400/10 text-cyber-cyan flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Software Development</h3>
+                            <p class="text-xs text-slate-400 mt-1">Building programming fundamentals and practical applications using Python and Java.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 flex gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-cyber-purple flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Web Development</h3>
+                            <p class="text-xs text-slate-400 mt-1">Learning and building interfaces with HTML and CSS, with an interest in full-stack development.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 flex gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-cyber-emerald flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Databases</h3>
+                            <p class="text-xs text-slate-400 mt-1">Working with MySQL and exploring MongoDB through development practice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-24 relative z-10 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <h2 class="text-xs font-mono tracking-widest text-cyber-cyan uppercase">02. Capabilities</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold mt-2">Technical Skills</p>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="filterSkills('all')" data-cat="all" class="skill-btn px-4 py-2 rounded-xl text-xs font-mono glass-card border border-cyber-cyan text-cyber-cyan">All</button>
+                <button onclick="filterSkills('programming')" data-cat="programming" class="skill-btn px-4 py-2 rounded-xl text-xs font-mono glass-card border border-slate-800 text-slate-400">Programming</button>
+                <button onclick="filterSkills('web')" data-cat="web" class="skill-btn px-4 py-2 rounded-xl text-xs font-mono glass-card border border-slate-800 text-slate-400">Web</button>
+                <button onclick="filterSkills('database')" data-cat="database" class="skill-btn px-4 py-2 rounded-xl text-xs font-mono glass-card border border-slate-800 text-slate-400">Database</button>
+                <button onclick="filterSkills('tools')" data-cat="tools" class="skill-btn px-4 py-2 rounded-xl text-xs font-mono glass-card border border-slate-800 text-slate-400">Tools</button>
+            </div>
+
+            <div id="skillsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="programming">
+                    <i class="fa-brands fa-python text-3xl text-cyber-cyan"></i>
+                    <h3 class="font-bold text-sm mt-3">Python</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Programming</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="programming">
+                    <i class="fa-brands fa-java text-3xl text-cyber-purple"></i>
+                    <h3 class="font-bold text-sm mt-3">Java</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Programming</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="web">
+                    <i class="fa-brands fa-html5 text-3xl text-orange-400"></i>
+                    <h3 class="font-bold text-sm mt-3">HTML</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Web</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="web">
+                    <i class="fa-brands fa-css3-alt text-3xl text-blue-400"></i>
+                    <h3 class="font-bold text-sm mt-3">CSS</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Web</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="database">
+                    <i class="fa-solid fa-database text-3xl text-cyber-emerald"></i>
+                    <h3 class="font-bold text-sm mt-3">MySQL</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Database</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="database">
+                    <i class="fa-solid fa-leaf text-3xl text-green-400"></i>
+                    <h3 class="font-bold text-sm mt-3">MongoDB</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Database</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="tools">
+                    <i class="fa-solid fa-code text-3xl text-cyan-300"></i>
+                    <h3 class="font-bold text-sm mt-3">VS Code</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Tool</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="tools">
+                    <i class="fa-solid fa-compass text-3xl text-green-300"></i>
+                    <h3 class="font-bold text-sm mt-3">MongoDB Compass</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Tool</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="tools">
+                    <i class="fa-solid fa-book-open text-3xl text-cyber-purple"></i>
+                    <h3 class="font-bold text-sm mt-3">Jupyter Notebook</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Tool</p>
+                </div>
+
+                <div class="skill-card glass-card rounded-2xl p-5 text-center" data-cat="programming">
+                    <i class="fa-solid fa-database text-3xl text-cyber-blue"></i>
+                    <h3 class="font-bold text-sm mt-3">SQL</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">Database</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <h2 class="text-xs font-mono tracking-widest text-cyber-cyan uppercase">03. Work</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold mt-2">Projects & Hackathon</p>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- QuizNova -->
+                <article class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                    <div class="p-7">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-cyber-purple flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-circle-question"></i>
+                            </div>
+                            <span class="text-xs font-mono text-cyber-purple">Java • Academic</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white">QuizNova – Java Quiz Application</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mt-3">
+                            A basic semester-based Java project created to practice core Java programming concepts
+                            through a simple quiz application.
+                        </p>
+
+                        <div class="mt-5 space-y-2 text-xs text-slate-400">
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Built using fundamental Java functions and programming concepts.</p>
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Implemented quiz questions, answer handling and result display.</p>
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Academic project focused on strengthening Java fundamentals.</p>
+                        </div>
+                    </div>
+
+                    <div class="px-7 pb-7 mt-auto flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">Java</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">OOP Basics</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">Academic Project</span>
+                    </div>
+                </article>
+
+                <!-- HackYatra -->
+                <article class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                    <div class="p-7">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-400/10 text-cyber-cyan flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-recycle"></i>
+                            </div>
+                            <span class="text-xs font-mono text-cyber-cyan">HackYatra 2025</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white">Waste Segregation Compliance Monitoring</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mt-3">
+                            A community-focused hackathon concept for monitoring waste segregation compliance
+                            during door-to-door waste collection.
+                        </p>
+
+                        <div class="mt-5 space-y-2 text-xs text-slate-400">
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Participated in HackYatra at NSRIT College in 2025.</p>
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Focused on proper segregation at the household collection stage.</p>
+                            <p><i class="fa-solid fa-check text-cyber-emerald mr-2"></i>Presented the idea as a community-service oriented solution.</p>
+                        </div>
+                    </div>
+
+                    <div class="px-7 pb-7 mt-auto flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">Hackathon</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">Community Service</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 text-xs font-mono">Waste Management</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION + CERTIFICATIONS -->
+    <section id="education" class="py-24 relative z-10 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-14">
+                <h2 class="text-xs font-mono tracking-widest text-cyber-cyan uppercase">04. Journey</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold mt-2">Education & Achievements</p>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10">
+
+                <!-- Education timeline -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">
+                        <i class="fa-solid fa-graduation-cap text-cyber-cyan mr-2"></i> Education
+                    </h3>
+
+                    <div class="border-l-2 border-slate-800 ml-3 pl-7 space-y-7">
+                        <div class="relative">
+                            <span class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-slate-950 border-2 border-cyber-cyan"></span>
+                            <span class="text-xs font-mono text-cyber-cyan">2025 – Present</span>
+                            <h4 class="font-bold mt-1">B.Tech in Computer Science & Engineering</h4>
+                            <p class="text-sm text-slate-400 mt-1">Lendi Institute of Engineering and Technology</p>
+                            <p class="text-xs text-cyber-emerald mt-1">CGPA: 8.95 / 10.0</p>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-slate-950 border-2 border-cyber-purple"></span>
+                            <span class="text-xs font-mono text-cyber-purple">2022 – 2025</span>
+                            <h4 class="font-bold mt-1">Diploma in Computer Science & Engineering</h4>
+                            <p class="text-sm text-slate-400 mt-1">Adarsh College of Engineering, Kakinada</p>
+                            <p class="text-xs text-cyber-emerald mt-1">Percentage: 86%</p>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-slate-950 border-2 border-cyber-emerald"></span>
+                            <span class="text-xs font-mono text-cyber-emerald">2021</span>
+                            <h4 class="font-bold mt-1">10th / Secondary School</h4>
+                            <p class="text-sm text-slate-400 mt-1">Kasturba Gandhi Balika Vidyalayam, Hiramandalam</p>
+                            <p class="text-xs text-cyber-emerald mt-1">Marks: 544</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">
+                        <i class="fa-solid fa-certificate text-cyber-purple mr-2"></i> Certifications & Training
+                    </h3>
+
+                    <div class="space-y-3">
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">Juniper Networks</h4>
+                            <p class="text-xs text-slate-400 mt-1">Networking certification</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">NPTEL – Internet of Things (IoT)</h4>
+                            <p class="text-xs text-slate-400 mt-1">Score: 68%</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">NPTEL – Data Analytics with Python</h4>
+                            <p class="text-xs text-slate-400 mt-1">Score: 63%</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">B10x – AI Tools Workshop</h4>
+                            <p class="text-xs text-slate-400 mt-1">Certificate received</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">Nano Banana – Career Glow-Up Night</h4>
+                            <p class="text-xs text-slate-400 mt-1">Pitch Night Edition – Participation Certificate</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <h4 class="font-semibold">International Women's Day Event</h4>
+                            <p class="text-xs text-slate-400 mt-1">College event participation</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-14">
+                <h2 class="text-xs font-mono tracking-widest text-cyber-cyan uppercase">05. Connect</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold mt-2">Let's Get In Touch</p>
+                <p class="text-slate-400 text-sm mt-3">Open to software development internships, projects and learning opportunities.</p>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+
+                <div class="lg:col-span-5 space-y-4">
+                    <a href="mailto:rohiniaika7853@gmail.com" class="glass-card rounded-2xl p-5 flex items-center gap-4 block">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-400/10 text-cyber-cyan flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-mono text-slate-400">Email</p>
+                            <p class="text-sm font-semibold break-all">rohiniaika7853@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="tel:+917853846544" class="glass-card rounded-2xl p-5 flex items-center gap-4 block">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-cyber-purple flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-mono text-slate-400">Phone</p>
+                            <p class="text-sm font-semibold">+91 7853846544</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/rohini-aika-4163833ab/" target="_blank" rel="noopener"
+                       class="glass-card rounded-2xl p-5 flex items-center gap-4 block">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-cyber-blue flex items-center justify-center text-xl">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-mono text-slate-400">LinkedIn</p>
+                            <p class="text-sm font-semibold">Rohini Aika</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.hackerrank.com/profile/rohiniaika7853" target="_blank" rel="noopener"
+                       class="glass-card rounded-2xl p-5 flex items-center gap-4 block">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-cyber-emerald flex items-center justify-center text-xl">
+                            <i class="fa-brands fa-hackerrank"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-mono text-slate-400">HackerRank</p>
+                            <p class="text-sm font-semibold">rohiniaika7853</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="lg:col-span-7 glass-card rounded-2xl p-7">
+                    <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-2">Your Name *</label>
+                                <input id="visitorName" required type="text"
+                                       class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan"
+                                       placeholder="Your name">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-2">Your Email *</label>
+                                <input id="visitorEmail" required type="email"
+                                       class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan"
+                                       placeholder="you@example.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-2">Message *</label>
+                            <textarea id="visitorMessage" required rows="6"
+                                      class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan"
+                                      placeholder="Hello Rohini..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple text-black font-bold">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-slate-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs font-mono text-slate-500 space-y-2">
+            <p>Designed & Built by <span class="text-cyber-cyan">Rohini Aika</span></p>
+            <p>© 2026 Rohini Aika • Computer Science & Engineering</p>
+            <p>Srikakulam District, Andhra Pradesh</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast"
+         class="fixed bottom-6 right-6 hidden glass-card border border-cyber-cyan text-cyber-cyan px-5 py-3 rounded-xl text-xs font-mono shadow-2xl z-[100]">
+    </div>
+
+    <script>
+        // Typing effect
+        const titles = [
+            "Software Developer",
+            "B.Tech CSE Student",
+            "Java Learner",
+            "Web Development Enthusiast",
+            "Problem Solver"
+        ];
+
+        let titleIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function typeLoop() {
+            const element = document.getElementById("typingText");
+            if (!element) return;
+
+            const current = titles[titleIndex];
+
+            if (deleting) {
+                charIndex--;
+                element.textContent = current.substring(0, charIndex);
+            } else {
+                charIndex++;
+                element.textContent = current.substring(0, charIndex);
+            }
+
+            let speed = deleting ? 45 : 85;
+
+            if (!deleting && charIndex === current.length) {
+                speed = 1500;
+                deleting = true;
+            } else if (deleting && charIndex === 0) {
+                deleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                speed = 400;
+            }
+
+            setTimeout(typeLoop, speed);
+        }
+
+        // Mobile menu
+        const menuBtn = document.getElementById("menuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        document.querySelectorAll(".mobile-link").forEach(link => {
+            link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+        });
+
+        // Skill filters
+        function filterSkills(category) {
+            document.querySelectorAll(".skill-btn").forEach(btn => {
+                const active = btn.dataset.cat === category;
+                btn.classList.toggle("border-cyber-cyan", active);
+                btn.classList.toggle("text-cyber-cyan", active);
+                btn.classList.toggle("border-slate-800", !active);
+                btn.classList.toggle("text-slate-400", !active);
+            });
+
+            document.querySelectorAll(".skill-card").forEach(card => {
+                card.style.display =
+                    category === "all" || card.dataset.cat === category
+                    ? "block"
+                    : "none";
+            });
+        }
+
+        // Copy terminal profile
+        function copyProfile() {
+            const profile = `class RohiniAika:
+    name = "Rohini Aika"
+    degree = "B.Tech CSE"
+    college = "Lendi Institute of Engineering and Technology"
+    cgpa = 8.95
+    skills = ["Python", "Java", "HTML", "CSS", "MySQL", "MongoDB"]`;
+
+            navigator.clipboard.writeText(profile)
+                .then(() => showToast("Profile code copied!"))
+                .catch(() => showToast("Copy not supported in this browser."));
+        }
+
+        // Contact form
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("visitorName").value.trim();
+            const email = document.getElementById("visitorEmail").value.trim();
+            const message = document.getElementById("visitorMessage").value.trim();
+
+            const subject = encodeURIComponent("Portfolio Contact from " + name);
+            const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+            );
+
+            window.location.href =
+                `mailto:rohiniaika7853@gmail.com?subject=${subject}&body=${body}`;
+
+            showToast("Opening your email app...");
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.remove("hidden");
+
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 3000);
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            typeLoop();
+        });
+    </script>
+</body>
+</html>
